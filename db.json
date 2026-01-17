@@ -1220,7 +1220,7 @@
     },
     {
         "id": "b4df0172-479f-4299-88e1-64b9fe451af2",
-        "isPaid": false,
+        "isPaid": true,
         "title": "200",
         "nominal": 200
     },
