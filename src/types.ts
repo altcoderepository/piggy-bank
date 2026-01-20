@@ -2,5 +2,6 @@ export type Payment = {
   id: string,
   isPaid: boolean,
   title: string,
-  nominal: number
+  nominal: number,
+  paymentDate: string | null
 }
