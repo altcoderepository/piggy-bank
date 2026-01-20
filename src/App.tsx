@@ -1,8 +1,8 @@
-import { Button, Col, notification, Row, Tooltip } from "antd"
+import { Button, Col, notification, Row, Tooltip, Typography } from "antd"
 import { createContext, useEffect, useMemo, useState } from "react";
 import type { Payment } from "./types";
 import { getPayments, patchPayment } from "./api/dailyPayments";
-import { getDeposited, getPercent, getTotalAmount } from "./helpers";
+import { getDateFromString, getDeposited, getPercent, getTotalAmount } from "./helpers";
 import { Error, Layout, Loading } from "./components";
 
 const Context = createContext({ name: 'Default' });
@@ -86,6 +86,19 @@ function App() {
         <p>Внесённая сумма: {deposited}</p>
         <p>Накоплено: {percent} %</p>
         <p>Осталось внести: {rest}</p>
+        <Typography.Title level={3}>История платежей:</Typography.Title>
+        {payments
+          .filter((payment) => payment.isPaid)
+          .sort((payment1, payment2) => {
+            return getDateFromString(payment2.paymentDate!).getTime() - getDateFromString(payment1.paymentDate!).getTime()
+          })
+          .map((payment) => (
+            <Typography.Paragraph>
+              <Typography.Text strong>{payment.paymentDate}:</Typography.Text>
+              <Typography.Text> +{payment.title} ₽.</Typography.Text>
+            </Typography.Paragraph>
+          ))
+        }
       </Layout>
     </Context.Provider>
   )

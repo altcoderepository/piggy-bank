@@ -9,3 +9,8 @@ export const getDeposited = (payments: Payment[]) => payments
 
 export const getPercent = (deposited: number, totalAmount: number) => 
   Math.floor(deposited / (totalAmount / 100));
+
+export const getDateFromString = (stringDate: string): Date => {
+  const [day, mounth, year] = stringDate.split('.');
+  return new Date(Number(year), Number(mounth) - 1, Number(day));
+}
